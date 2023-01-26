@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+use Dotenv\Dotenv;
+use Illuminate\Container\Container;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Console\Application;
+use YouCan\Commands\CalculateDistanceCommand;
+
+$container = new Container;
+$events = new Dispatcher($container);
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$artisan = new Application($container, $events, 'Version 1');
+$artisan->setName('My Console App Name');
+
+var_dump("hello", getenv('MAX_ATTEMPTS'));
+//$artisan->resolve(CalculateDistanceCommand::class);
+
+$artisan->run();
